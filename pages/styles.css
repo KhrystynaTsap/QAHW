@@ -1,0 +1,43 @@
+body{
+	background-color: black;
+}
+h2, h3{
+	color: white;
+	text-shadow: 2px 2px gray;
+	margin-left: 50px;
+}
+p{
+	color: white;
+	text-shadow: 1px 1px gray;
+	font-family: Garamond, serif;
+}
+div{
+	margin-top:35px;
+	margin-bottom:35px;
+}
+ul{
+	color:white;
+	text-shadow: 1px 1px gray;
+	padding:25px;
+	font-family: Garamond, serif;
+}
+a:link {
+	color: white;
+}
+a:visited {
+	color: slateblue;
+}
+a:hover {
+	color:dodgerblue;
+}
+a:active {
+	color: blue;
+}
+table, th, td  {
+	border-spacing: 0px;
+	color: white;
+	border: 1px solid white;
+	table-layout: auto;
+}
+
+
