@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "30f70695-06df-49b4-a7a5-c544bbf16e86",
+		"name": "ДЗ 18. API тестування додатку graphQL - Ukrainian Cities",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28260725"
+	},
+	"item": [
+		{
+			"name": "getAllCities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"city_id0\", jsonData.data.getAllCities[0].id);\r",
+							"postman.setEnvironmentVariable(\"city_id5\", jsonData.data.getAllCities[5].id);\r",
+							"postman.setEnvironmentVariable(\"KyivId\", jsonData.data.getAllCities[10].id);\r",
+							"postman.setEnvironmentVariable(\"LvivId\", jsonData.data.getAllCities[13].id);\r",
+							"console.log(jsonData);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{\r\n    getAllCities{\r\n    id\r\n    name\r\n    square\r\n}}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://graphql-ukrainian-cities.hillel.it/graphql",
+					"protocol": "https",
+					"host": [
+						"graphql-ukrainian-cities",
+						"hillel",
+						"it"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCityByID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Черкаси\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query($city_id0:ID!){\r\n    getCityById(id:$city_id0){\r\n        id\r\n        name\r\n        square\r\n    }\r\n}",
+						"variables": "{\r\n    \"city_id0\":{{city_id0}}\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://graphql-ukrainian-cities.hillel.it/graphql",
+					"protocol": "https",
+					"host": [
+						"graphql-ukrainian-cities",
+						"hillel",
+						"it"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCityByRangeId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code name has is OK\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query($city_id0:Int!, $city_id5:Int!){\r\n    getCityByRangeId(filter:{minId:$city_id5,maxId:$city_id0}){\r\n        id\r\n        name\r\n        square\r\n    }\r\n}\r\n",
+						"variables": "{\r\n    \"city_id0\":{{city_id0}},\r\n    \"city_id5\":{{city_id5}}\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://graphql-ukrainian-cities.hillel.it/graphql",
+					"protocol": "https",
+					"host": [
+						"graphql-ukrainian-cities",
+						"hillel",
+						"it"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCityDescription",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Найглибша станція метро в світі\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Арсенальна\");\r",
+							"});\r",
+							"pm.test(\"Найрізноманітніший релігійний центр в Україні\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Львів\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($KyivId:ID!, $LvivId:ID!) {\r\n    Kyiv:getCityDescription(id:$KyivId)\r\n    Lviv:getCityDescription(id:$LvivId)\r\n    Another:getCityById(id:5){\r\n        ...CityDetails\r\n    }\r\n}\r\nfragment CityDetails on CityAbstract{\r\n    id\r\n    name\r\n    square\r\n}",
+						"variables": "{\r\n    \"KyivId\":{{KyivId}},\r\n    \"LvivId\":{{LvivId}}\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://graphql-ukrainian-cities.hillel.it/graphql",
+					"protocol": "https",
+					"host": [
+						"graphql-ukrainian-cities",
+						"hillel",
+						"it"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addCity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation($name:String!,$square:Float!,$description:String!){\r\n    addCity(name:$name,square:$square,description:$description){\r\n        id\r\n        name\r\n        square\r\n       ... on City{\r\ndescription\r\n       }\r\n    }\r\n}",
+						"variables": "{\r\n    \"name\":\"{{$randomCity}}\",\r\n    \"square\":\"{{$randomInt}}\",\r\n    \"description\":\"{{$randomCatchPhraseDescriptor}}\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "https://graphql-ukrainian-cities.hillel.it/graphql",
+					"protocol": "https",
+					"host": [
+						"graphql-ukrainian-cities",
+						"hillel",
+						"it"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 1500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+							"});\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation($city_id5:ID!){\r\n    updateCity(id:$city_id5, name:\"Українське\", square: 100500, description:\"Хороше місто\"){\r\n        id\r\n        name\r\n        square\r\n        ... on City{\r\n            description\r\n        }\r\n    }\r\n}",
+						"variables": "{\"city_id5\":{{city_id5}}}"
+					}
+				},
+				"url": {
+					"raw": "https://graphql-ukrainian-cities.hillel.it/graphql",
+					"protocol": "https",
+					"host": [
+						"graphql-ukrainian-cities",
+						"hillel",
+						"it"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation($city_id5:ID!){\r\n    deleteCity(id:$city_id5)\r\n}",
+						"variables": "{\"city_id5\":{{city_id5}}}"
+					}
+				},
+				"url": {
+					"raw": "https://graphql-ukrainian-cities.hillel.it/graphql",
+					"protocol": "https",
+					"host": [
+						"graphql-ukrainian-cities",
+						"hillel",
+						"it"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
