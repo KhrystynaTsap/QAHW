@@ -1,0 +1,89 @@
+﻿Test plan for the “Hillel Auto”
+Introduction
+The Test plan is intended for:
+* regulation of testing processes;
+* task prioritization;
+* resource planning;
+* accounting software and human resources.
+The app allows users to enter their fuel costs and track their replacement schedule and plan ahead for vehicle maintenance costs.
+
+
+Test items
+The object to testing is “Hillel Auto” application which consists of the next parts:
+* AutoList: Functionality related to the main page that displays the list of vehicles and pdf files with instructions.
+* Profiles: Functionality related to managing user profiles and guest profiles.
+* Fuel Expenses: Functionality related to recording and managing fuel expenses for the user and for the guest.
+* Garage: Functionality related to managing the user's and guest's
+* vehicle garage.
+* Instructions: Functionality related to accessing car repair instructions and manuals.
+* Settings: Functionality related to user settings and preferences.
+Approach
+* Test level - System testing.
+* Test types - functional, UI, regression, maintenance. 
+* Test technique  - Black Box.
+* Test execution - manual.
+Entry/exit criteria
+Entry criteria:
+• Completion of program development.
+• Setting up a test environment with the necessary devices and platforms.
+• All the requirements for the functionality of "Hillel Auto" are covered by test cases.
+ Exit criteria:
+• All test cases executed and reported.
+• At least 85% of test cases are passed.
+• Absence of Blocker, Critical, Major defects.
+• At least 70% of minor defects have been fixed
+• At least 50% of Trivial defects have been fixed
+
+
+
+
+Environments needs
+* OS: Windows 10 22H2 ;Chrome 113.0.5672.127;
+* Mob OS:Android 12; Chrome 113.0.5672.76
+* OS: Windows 10 Home; Opera GX LVL 4 (core: 98.0.4759.82)
+* Mob OS: Android 11; Chrome 114.0.5735.58 
+* OS: Win 11 Home 64-bit version 22H2 Chrome 113.0.5672.127 
+* Mob OS: Android 12 
+* OS: Windows 11 pro 22H2 Microsoft Edge 114.0.1823.43
+* Mob OS :IOS 16.5
+
+
+Responsibilities
+1. Testing team: Responsible for test planning, test case creation, test execution, and defect reporting.
+2. Development team: Responsible for fixing reported defects and providing necessary support during testing
+The testing team create test  cases according to “Hillel Auto” requirements https://confluence.ithillel.com/display/HA/Hillel+auto
+
+
+Test case creation responsibilities:
+Team member
+	Test case covering
+	M1
+	 User Garage, Guest Garage and Profile, AutoList
+	M2
+	Guest fuel expenses and User fuel expenses
+	Khrystyna Tsap
+	User settings,  User and Guest headers, User and Guest instructions
+	M3
+	Main page
+	
+
+Execute the cases responsibilities:
+Team member
+	Test case execution
+	M1
+	Guest fuel expenses and User fuel expenses
+	M2
+	User and Guest instructions, Main page, AutoList
+	Khrystyna Tsap
+	User Garage, Guest Garage and Profile
+	M3
+	User settings,  User and Guest headers
+	
+
+Risks and contingencies
+* Delayed correction of defects by the development team. May cause delays in product release.
+To resolve, hold weekly meetings with developers to discuss time requirements for eliminating defects. Discussions on changing the deadline view are possible
+* Inaccurately described product requirements. May lead to the development of a product not in demand by users.
+To avoid the creation of a product that does not meet the expectations of users, the requirements for the program must be agreed with the teams of developers, testers, and stakeholders
+* Structural changes in the team (layoffs, maternity leave, sick leave) may lead to non-compliance with the deadline.
+In case of a reduction in the working staff on the project, the responsibilities of the employee who dropped out of the process are distributed among the team. Possible discussions of changing the deadline with the product owner.
